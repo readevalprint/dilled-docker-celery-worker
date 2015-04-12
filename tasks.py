@@ -19,4 +19,7 @@ def add(x, y):
 
 @app.task(name="tasks.run")
 def run(dilled_func, args, kwargs):
-    return dill.loads(dilled_func)(*args, **kwargs)
+    try:
+        return dill.loads(dilled_func)(*args, **kwargs)
+    except Exceptions as e:
+        return e
